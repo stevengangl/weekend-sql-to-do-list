@@ -1,0 +1,23 @@
+table {
+    margin: 0px 20px 0px 20px;
+    border: 1px solid black;
+    width: 100%;
+}
+
+th {
+    padding: 10px;
+    border: 1px solid black;
+    margin: 0px;
+}
+
+#tasksHeader{
+    width: 60%;
+}
+
+#completeHeader{
+    width: auto;
+}
+
+#buttonHeader{
+    width: auto;
+}
