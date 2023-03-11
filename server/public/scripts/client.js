@@ -3,22 +3,23 @@
 //get listeners✅
 //add get request client side✅
 //console.log after each step✅
-
 //add get request server side✅
 //console.log after each step✅
 //add database to get route✅
 //test data to make sure it comes back correct✅
+//add post request client side✅
+//console.log after each step✅
+//add post request server side✅
+//console.log after each step✅
+//TEST data going from the server to the database back to the server✅
+//append info to dom to make sure get/post routes work✅
 
-//add post request client side
-//console.log after each step
-
-//add post request server side
-//console.log after each step
-
-//TEST data going from the server to the database back to the server
-
-//append info to dom to make sure get/post routes work
-
+//PUT/DELETE ROUTES
+//add delete request client side
+//add delete button✅
+//add listener to delete button✅
+//⭐️delete button needs to target an id⭐️
+//add delete request server side🔵use sql to test deleting things beforehand
 
 $(document).ready(onReady);
 
@@ -26,6 +27,7 @@ function onReady() {
     console.log('onReady works')
     getTasksFromDataBase()
     $("#submitBtn").on('click', sendTasksToDataBase)
+    $('#tasksOnDom').on('click', '#deleteBtn', deleteTasks);
 }
 
 let inputForm = {
@@ -90,3 +92,8 @@ function sendTasksToDataBase() {
 //PUT REQUEST
 
 //DELETE REQUEST
+function deleteTasks(){
+    let idToDelete = $(this).parent().parent().data().id;
+  
+    console.log('the id of the thing im clicking on', idToDelete)
+}
