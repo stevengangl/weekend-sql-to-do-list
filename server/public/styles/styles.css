@@ -21,3 +21,7 @@ th {
 #buttonHeader{
     width: auto;
 }
+
+td {
+    border: 1px solid black;
+}

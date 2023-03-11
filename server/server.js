@@ -38,7 +38,24 @@ app.get('/tasks', (req,res) => {
 })
 
 //POST REQUEST
+app.post('/tasks', (req,res) => {
+    let newTasks = req.body
+    console.log('in POST request', req.body)
+    console.log('new tasks:', newTasks)
 
+    let queryText = `INSERT INTO "tasks" ("task", "complete") 
+    VALUES ($1, $2)`;
+
+    pool.query(queryText, [newTasks.task, false])
+    .then((result) => {
+console.log('success adding new data', newTasks)
+res.sendStatus(201)
+    })
+    .catch((error) => {
+        console.log('error adding new tasks', error)
+        res.sendStatus(500)
+    })
+})
 
 
 //PUT REQUEST
