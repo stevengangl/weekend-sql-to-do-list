@@ -28,6 +28,8 @@ function onReady() {
     getTasksFromDataBase()
     $("#submitBtn").on('click', sendTasksToDataBase)
     $('#tasksOnDom').on('click', '#deleteBtn', deleteTasks);
+    $('#tasksOnDom').on('click', '#completeBtn', changeToComplete);
+
 
 }
 
@@ -61,21 +63,18 @@ function renderToDom(tasks) {
         <tr data-id=${column.id}>
         <td>${column.task}</td>
         <td>${column.complete}</td>
-        <td><button id='deleteBtn'>Delete</button><button id='completeBtn'>Complete</button></td>
-       
-
+        <td><button id='deleteBtn'>Delete</button>
+        <button id='completeBtn'>Complete</button></td>
+    
         </tr>
         `)
     }
 }
 
-
-
-//
 //POST REQUEST
 function sendTasksToDataBase() {
     inputForm.task = $("#inputField").val()
-    // console.log('listener works')
+
     $.ajax({
         method: 'POST',
         url: '/tasks',
@@ -84,7 +83,7 @@ function sendTasksToDataBase() {
         .then((response) => {
             console.log('post route works, here is the data it got back', response)
             getTasksFromDataBase()//this had to be here to see the get requests work
-            clearInput()
+            clearInput()//this had to be here to get the inputs to clear on click
         })
         .catch((error) => {
             alert('post request failed')
@@ -92,9 +91,21 @@ function sendTasksToDataBase() {
 }
 
 //PUT REQUEST
+//I set all values of cpmpleted to default as false
+//I should only need 1 function to handle this
+//when complete button hit it needs to
+//1️⃣the box taht say complete needs to change to green
+//2️⃣complete option needs to be checked off--🔴🔵need to look into how to do this
+//2️⃣--css will be needed to make those happen
+//3️⃣database needs to be updated to reflect if a task is complete
+function changeToComplete(){//⭐️normally i use lecture notes but i had to reference the koala project for this
+const idToMark = $(this).parent().parent().data().id;
+console.log('thing to change',idToMark)
+}
+
 
 //DELETE REQUEST
-//🔵🔴this is not deleting data from the dom until i refresh the page manually
+//
 //Im still pretty fuzzy on PUT/DELETE routes
 function deleteTasks(){
     let idToDelete = $(this).parent().parent().data().id;
