@@ -92,8 +92,19 @@ function sendTasksToDataBase() {
 //PUT REQUEST
 
 //DELETE REQUEST
+//🔵🔴this is not deleting data from the dom until i refresh the page manually
+//Im still pretty fuzzy on PUT/DELETE routes
 function deleteTasks(){
     let idToDelete = $(this).parent().parent().data().id;
-  
-    console.log('the id of the thing im clicking on', idToDelete)
+    console.log(idToDelete)
+
+    $.ajax({
+        method: 'DELETE',
+        url: `/tasks/${idToDelete}`
+    }).then((result) => {
+        console.log('successfully deleted', idToDelete)
+        getTasksFromDataBase()
+    }).catch((error) => {
+        console.log('error deleting', error)
+    })
 }
