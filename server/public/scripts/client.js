@@ -28,6 +28,7 @@ function onReady() {
     getTasksFromDataBase()
     $("#submitBtn").on('click', sendTasksToDataBase)
     $('#tasksOnDom').on('click', '#deleteBtn', deleteTasks);
+
 }
 
 let inputForm = {
@@ -83,6 +84,7 @@ function sendTasksToDataBase() {
         .then((response) => {
             console.log('post route works, here is the data it got back', response)
             getTasksFromDataBase()//this had to be here to see the get requests work
+            clearInput()
         })
         .catch((error) => {
             alert('post request failed')
@@ -107,4 +109,8 @@ function deleteTasks(){
     }).catch((error) => {
         console.log('error deleting', error)
     })
+}
+
+function clearInput(){
+    $('#inputField').val('')
 }
