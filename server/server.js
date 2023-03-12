@@ -59,11 +59,24 @@ app.post('/tasks', (req, res) => {
 
 
 //PUT REQUEST
+app.put('/tasks/:id', (req, res) => {
+    console.log('inside /tasks/:id', req.params.id)
+    const idToChange = req.params.id;
+    const sqlText = `UPDATE tasks SET "complete" = true WHERE id=$1;`
 
+    pool.query(sqlText, [idToChange])
+        .then((result) => {
+            console.log('tasks id', idToChange, 'marked')
+            res.sendStatus(200)
+        })
+        .catch((error) => {
+            res.sendStatus(500)
+        })
+})
 
 //DELETE REQUEST🔵🔴
 //⭐️I dont have a great grasp on put/delete routes
-//🔵🔴this is not deleting data from the dom
+
 app.delete('/tasks/:id', (req, res) => {
     let idToRemove = req.params.id;     //⭐️I dont really understand how the targeted id will be $1? since each id has its own id wouldnt this only target the row with the id of 1?
     let queryText = `

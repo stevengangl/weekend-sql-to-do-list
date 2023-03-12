@@ -99,8 +99,19 @@ function sendTasksToDataBase() {
 //2️⃣--css will be needed to make those happen
 //3️⃣database needs to be updated to reflect if a task is complete
 function changeToComplete(){//⭐️normally i use lecture notes but i had to reference the koala project for this
-const idToMark = $(this).parent().parent().data().id;
-console.log('thing to change',idToMark)
+const idToChange = $(this).parent().parent().data().id;
+console.log('thing to change',idToChange)
+
+$.ajax({
+    method: 'PUT',
+    url: `/tasks/${idToChange}`
+}).then((response) => {
+    getTasksFromDataBase();
+    console.log('task put route worked!')
+}).catch((error) => {
+    alert('task put route didnt work')
+})
+
 }
 
 
