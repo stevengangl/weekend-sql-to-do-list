@@ -1,9 +1,8 @@
 # Project Name
 
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
+weekend to do application 
 
 ## Description
 
-Your project description goes here. What problem did you solve? How did you solve it?
+this application is to help keep track of tasks or things you need to get done. It allows you to write a task and display it in the browseer. It also has an optiomn to click a complete button. When this is clicked it turns the task from saying complete false to complete true. It also changes the background color of the completed area to help indicate a task is done.
 
-Additional README details can be found [here](https://github.com/PrimeAcademy/readme-template/blob/master/README.md).
