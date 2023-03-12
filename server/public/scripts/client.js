@@ -31,6 +31,7 @@ function onReady() {
     $('#tasksOnDom').on('click', '#completeBtn', changeToComplete);
 
 
+
 }
 
 let inputForm = {
@@ -57,17 +58,28 @@ function renderToDom(tasks) {
 
     //need to add all the tasks to the table
     for (let column of tasks) {
-        //I will need to target the ids to delete stuff
-        //🔴🔵not tpositive if this set up is correct for it🔴🔵
-        $("#tasksOnDom").append(`
+        if (column.complete === false) {
+            $("#tasksOnDom").append(`
         <tr data-id=${column.id}>
         <td>${column.task}</td>
-        <td>${column.complete}</td>
+        <td class ='inCompleteArea'>${column.complete}</td>
         <td><button id='deleteBtn'>Delete</button>
         <button id='completeBtn'>Complete</button></td>
     
         </tr>
-        `)
+        `);
+        }
+        if (column.complete === true) {
+            $("#tasksOnDom").append(`
+            <tr data-id=${column.id}>
+            <td>${column.task}</td>
+            <td class ='completeArea'>${column.complete}</td>
+            <td><button id='deleteBtn'>Delete</button>
+            <button id='completeBtn'>Complete</button></td>
+        
+            </tr>
+            `);
+        }
     }
 }
 
@@ -98,27 +110,30 @@ function sendTasksToDataBase() {
 //2️⃣complete option needs to be checked off--🔴🔵need to look into how to do this
 //2️⃣--css will be needed to make those happen
 //3️⃣database needs to be updated to reflect if a task is complete
-function changeToComplete(){//⭐️normally i use lecture notes but i had to reference the koala project for this
-const idToChange = $(this).parent().parent().data().id;
-console.log('thing to change',idToChange)
+function changeToComplete() {//⭐️normally i use lecture notes but i had to reference the koala project for this
+    const idToChange = $(this).parent().parent().data().id;
+    console.log('thing to change', idToChange)
 
-$.ajax({
-    method: 'PUT',
-    url: `/tasks/${idToChange}`
-}).then((response) => {
-    getTasksFromDataBase();
-    console.log('task put route worked!')
-}).catch((error) => {
-    alert('task put route didnt work')
-})
+    $.ajax({
+        method: 'PUT',
+        url: `/tasks/${idToChange}`
+    }).then((response) => {
+        getTasksFromDataBase();
+        console.log('task put route worked!')
+    }).catch((error) => {
+        alert('task put route didnt work')
+    })
 
 }
 
+function changeColor() {
+
+}
 
 //DELETE REQUEST
 //
 //Im still pretty fuzzy on PUT/DELETE routes
-function deleteTasks(){
+function deleteTasks() {
     let idToDelete = $(this).parent().parent().data().id;
     console.log(idToDelete)
 
@@ -133,6 +148,6 @@ function deleteTasks(){
     })
 }
 
-function clearInput(){
+function clearInput() {
     $('#inputField').val('')
 }
