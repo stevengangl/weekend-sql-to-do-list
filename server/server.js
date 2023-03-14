@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 // const koalaRouter = require('./routes/koala.router') example of a route
 const pg = require('pg');
 
@@ -9,12 +9,23 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('server/public'));
 
 
-const pool = new pg.Pool({
-    database: 'weekend-to-do-app',
-    host: 'localhost',
-    port: 5432
-});
+let pool;
 
+if (process.env.DATABASE_URL) {
+    pool = new pg.Pool({
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: false
+        }
+    });
+}
+else {
+    pool = new pg.Pool({
+        host: 'localhost',
+        port: 5432,
+        database: 'weekend-to-do-app', 
+    });
+}
 // let testObject = {
 //     inputOne: 1,
 //     inputTwo: 2

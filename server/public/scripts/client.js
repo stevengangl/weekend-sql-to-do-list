@@ -30,8 +30,6 @@ function onReady() {
     $('#tasksOnDom').on('click', '#deleteBtn', deleteTasks);
     $('#tasksOnDom').on('click', '#completeBtn', changeToComplete);
 
-
-
 }
 
 let inputForm = {
@@ -126,13 +124,10 @@ function changeToComplete() {//⭐️normally i use lecture notes but i had to r
 
 }
 
-function changeColor() {
-
-}
 
 //DELETE REQUEST
 //
-//Im still pretty fuzzy on PUT/DELETE routes
+//Im still  fuzzy on PUT/DELETE routes, targeting the id is confusing, but i do get the parent siblings stuff
 function deleteTasks() {
     let idToDelete = $(this).parent().parent().data().id;
     console.log(idToDelete)
